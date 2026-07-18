@@ -1,0 +1,82 @@
+[
+  {
+    "input": "Would it be possible to assemble a scheme of typos?",
+    "strategies": [
+      "digits",
+      "cyrillic"
+    ],
+    "max_substitution_ratio": 1.0,
+    "encoding": "cl100k_base",
+    "expected_inflated_text": "W0uld 1t b3 рoѕѕibl3 t0 4ѕѕ3mbl3 4 5сh3m3 0f tуp0ѕ?",
+    "expected_original_token_count": 12,
+    "expected_inflated_token_count": 48,
+    "expected_char_count": 51
+  },
+  {
+    "input": "Would it be possible to assemble a scheme of typos?",
+    "strategies": [
+      "digits",
+      "cyrillic",
+      "fullwidth"
+    ],
+    "max_substitution_ratio": 1.0,
+    "encoding": "cl100k_base",
+    "expected_inflated_text": "Wｏuld ｉt bｅ ｐｏѕѕｉblｅ tｏ ａѕѕｅmblｅ ａ ｓｃhｅmｅ ｏf tｙｐｏѕ?",
+    "expected_original_token_count": 12,
+    "expected_inflated_token_count": 69,
+    "expected_char_count": 51
+  },
+  {
+    "input": "Hi there!",
+    "strategies": [
+      "digits",
+      "cyrillic"
+    ],
+    "max_substitution_ratio": 1.0,
+    "encoding": "cl100k_base",
+    "expected_inflated_text": "H1 th3r3!",
+    "expected_original_token_count": 3,
+    "expected_inflated_token_count": 7,
+    "expected_char_count": 9
+  },
+  {
+    "input": "The quick brown fox jumps over the lazy dog.",
+    "strategies": [
+      "digits",
+      "cyrillic",
+      "fullwidth",
+      "case"
+    ],
+    "max_substitution_ratio": 1.0,
+    "encoding": "cl100k_base",
+    "expected_inflated_text": "Thｅ qUｉｃk bRｏWn fｏｘ jumｐѕ ｏvｅr tHｅ lａzｙ dｏg.",
+    "expected_original_token_count": 10,
+    "expected_inflated_token_count": 49,
+    "expected_char_count": 44
+  },
+  {
+    "input": "a",
+    "strategies": [
+      "digits"
+    ],
+    "max_substitution_ratio": 1.0,
+    "encoding": "cl100k_base",
+    "expected_inflated_text": "a",
+    "expected_original_token_count": 1,
+    "expected_inflated_token_count": 1,
+    "expected_char_count": 1
+  },
+  {
+    "input": "",
+    "strategies": [
+      "digits",
+      "cyrillic"
+    ],
+    "max_substitution_ratio": 1.0,
+    "encoding": "cl100k_base",
+    "expected_inflated_text": "",
+    "expected_original_token_count": 0,
+    "expected_inflated_token_count": 0,
+    "expected_char_count": 0
+  }
+]

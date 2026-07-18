@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adversarial Tokenmaxxing</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <div class="header-main">
+          <p class="eyebrow">// tok3n_inflat0r.exe</p>
+          <h1>Adversarial Tokenmaxxing</h1>
+          <p class="lede">
+            LLMs rely on BPE tokenizers to convert spans of raw text into their 
+            input tokens. These tokenizers merge common character chains into single tokens. 
+            This demo finds same-length lookalike substitutions (digits, Cyrillic
+            homoglyphs, fullwidth forms, case flips) that break those merges,
+            maximizing token count while keeping character length fixed.
+            Same length readable(ish) text, but many more tokens, resulting in a much 
+            higher cost for any LLM to read it.
+          </p>
+        </div>
+        <div class="cost-badge" aria-label="Cost increase">
+          <span class="cost-label">COST INCREASE</span>
+          <span class="cost-value" id="stat-cost-ratio">—</span>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <div class="pane">
+          <div class="pane-header">
+            <label for="input-text">input</label>
+            <div class="pane-metrics">
+              <span><span class="metric-label">bytes</span> <span id="stat-in-bytes">0</span></span>
+              <span><span class="metric-label">in_tokens</span> <span id="stat-in-tokens">0</span></span>
+              <span class="char-count" id="char-count">0 / 400</span>
+            </div>
+          </div>
+          <div class="token-editor">
+            <div
+              id="input-highlights"
+              class="token-highlights"
+              aria-hidden="true"
+            ></div>
+            <textarea
+              id="input-text"
+              class="token-input"
+              rows="8"
+              maxlength="400"
+              placeholder="paste text to inflate…"
+              spellcheck="false"
+            >Would it be possible to assemble a scheme of typos?</textarea>
+          </div>
+          <p class="input-hint" id="input-status" hidden></p>
+        </div>
+
+        <div class="pane">
+          <div class="pane-header">
+            <div class="pane-label">inflated</div>
+            <div class="pane-metrics">
+              <span><span class="metric-label">bytes</span> <span id="stat-out-bytes">0</span></span>
+              <span><span class="metric-label">out_tokens</span> <span id="stat-out-tokens">0</span></span>
+              <button type="button" id="copy-btn" class="copy-btn">copy</button>
+            </div>
+          </div>
+          <div id="inflated-view" class="token-view" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <details class="controls-accordion">
+        <summary>controls</summary>
+        <section class="controls" aria-label="Inflation controls">
+          <div class="strategy-groups">
+            <fieldset class="strategy-group">
+              <legend>ascii_only</legend>
+              <div class="strategy-toggles">
+                <label><input type="checkbox" name="strategy" value="digits" checked /> digits</label>
+                <label><input type="checkbox" name="strategy" value="case" checked /> case</label>
+              </div>
+            </fieldset>
+            <fieldset class="strategy-group">
+              <legend>expanded_unicode</legend>
+              <div class="strategy-toggles">
+                <label><input type="checkbox" name="strategy" value="cyrillic" checked /> cyrillic</label>
+                <label><input type="checkbox" name="strategy" value="fullwidth" /> fullwidth</label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="control-row">
+            <label class="slider-label" for="aggressiveness">
+              aggressiveness
+              <span id="aggressiveness-value">100%</span>
+            </label>
+            <input
+              id="aggressiveness"
+              type="range"
+              min="0"
+              max="100"
+              value="100"
+              step="1"
+            />
+          </div>
+
+          <div class="control-row">
+            <label for="encoding">encoding</label>
+            <select id="encoding">
+              <option value="cl100k_base">gpt4 / cl100k_base</option>
+              <option value="o200k_base" selected>gpt4o / o200k_base</option>
+            </select>
+          </div>
+        </section>
+      </details>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
