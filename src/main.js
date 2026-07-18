@@ -20,6 +20,10 @@ const statCostRatio = document.getElementById("stat-cost-ratio");
 
 inputEl.maxLength = MAX_INPUT_CHARS;
 
+/** Cleared once on first focus so the demo seed doesn't need manual deleting. */
+const demoSeedText = inputEl.value;
+let demoSeedCleared = false;
+
 let latestInflated = "";
 let debounceTimer = null;
 let inflateGeneration = 0;
@@ -173,6 +177,18 @@ function scheduleInflate() {
   }, delay);
 }
 
+inputEl.addEventListener("focus", () => {
+  if (demoSeedCleared) return;
+  if (inputEl.value !== demoSeedText) {
+    demoSeedCleared = true;
+    return;
+  }
+  demoSeedCleared = true;
+  inputEl.value = "";
+  updateCharCount();
+  renderPlainHighlights("");
+  scheduleInflate();
+});
 inputEl.addEventListener("input", () => {
   const truncated = clampInput();
   updateCharCount(truncated);
