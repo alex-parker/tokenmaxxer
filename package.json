@@ -10,7 +10,7 @@
     "test": "vitest run"
   },
   "keywords": ["tiktoken", "bpe", "tokenizer", "tokenmaxxing"],
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "js-tiktoken": "^1.0.21"
   },
